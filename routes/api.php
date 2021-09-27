@@ -15,3 +15,5 @@ Route::middleware('login')->group(function (){
 Route::post('login',[ApiController::class,'login']);
 
 Route::post('main-info',[BlogController::class,'getMainInfo']);
+
+Route::post('about-us',[BlogController::class,'getAboutUs']);
