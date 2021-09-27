@@ -4,7 +4,7 @@ use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataCrypter;
-
+use App\Http\Controllers\BlogController;
 
 
 Route::middleware('login')->group(function (){
@@ -14,3 +14,4 @@ Route::middleware('login')->group(function (){
 
 Route::post('login',[ApiController::class,'login']);
 
+Route::post('main-info',[BlogController::class,'getMainInfo']);
