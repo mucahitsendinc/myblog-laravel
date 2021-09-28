@@ -21,11 +21,11 @@ class Settings extends Migration
             $table->string('update_date');
         });
         DB::table('settings')->insert([
-            ['setting'=>'access','option'=>'123123'],
-            ['setting'=>'contact','option'=>'enable'],
-            ['setting'=>'comment','option'=>'enable'],
-            ['setting'=>'post','option'=>'enable'],
-            ['setting'=>'search','option'=>'enable']
+            ['setting'=>'access','option'=>'123123','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')],
+            ['setting'=>'contact','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')],
+            ['setting'=>'comment','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')],
+            ['setting'=>'post','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')],
+            ['setting'=>'search','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')]
         ]);
     }
 
