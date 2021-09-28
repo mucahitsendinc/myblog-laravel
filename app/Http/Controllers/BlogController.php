@@ -37,6 +37,14 @@ class BlogController extends Controller
     }
     public function sendContact(Request $request){
 
+        $check=DB::table('settings')->where('setting','contact')->first(['option']);
+        if($check->option!="enable"){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'İletişim formu yetkili tarafından devre dışı bırakılmış durumda. Lütfen daha sonra tekrar deneyin.'
+            ],402);
+        }
+
         $name=$request->name;
         $surname=$request->surname;
         $email=$request->email;
@@ -93,5 +101,64 @@ class BlogController extends Controller
         ],401);
 
 
+    }
+    public function createPost(Request $request){
+        $title=$request->title??'';
+        $desc=$request->description??'';
+        $url=$request->url??'';
+        $image=$request->image??'';
+        $content=$request->content??'';
+        $tags=$request->tags??[];
+
+        $tags=$tags!=[] ? json_decode($tags) : [];
+
+        if(strlen($title)<3 || strlen($title)>255){ $error="Başık uzun/kısa!"; }
+        else if(strlen($desc)>255){ $error="Açıklama uzun!"; }
+        else if(strlen($url)<3 || strlen($url)>255){ $error="Url uzun/kısa!"; }
+        else if(strlen($image)<3 || strlen($image)>255){ $error="Resim uzun/kısa!"; }
+        else if(strlen($content)<10){ $error="İçerik uzun/kısa!"; }
+
+        if(isset($error)){
+            return response()->json([
+                'status'=>'error',
+                'message'=>$error
+            ],402);
+        }
+
+        $control=DB::table('posts')
+                        ->where(function($query) use ($title,$url){
+                            $query->where('title',$title)
+                                ->orwhere('url',$url);
+                        })
+                        ->where('status',0)
+                        ->get();
+
+        if(count($control)>0){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Bu başlık/url farklı bir postda aktif olarak kullanılıyor'
+            ],402);
+        }
+
+        $save=DB::table('posts')->insert([
+            'title'=>$title,
+            'description'=>$desc,
+            'url'=>$url,
+            'image'=>$image,
+            'content'=>$content,
+            'status'=>0,
+            'create_date'=>date('Y-m-d H:i:s'),
+            'update_date'=>date('Y-m-d H:i:s')
+        ]);
+
+        if($save){
+
+            foreach ($tags as $tag){
+
+            }
+
+        }
+
+        //return 123;
     }
 }

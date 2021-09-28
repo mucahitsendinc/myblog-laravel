@@ -17,7 +17,7 @@ class DataCrypter extends Controller
      */
 
     public $explode_key="@MucahitSendinc@";
-    public $access_time=30;  //seconds
+    public $access_time=31556926;  //seconds
 
     public $method="aes-128-cbc";
     public $key="9071bvc3d";

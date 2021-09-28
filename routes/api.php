@@ -8,13 +8,12 @@ use App\Http\Controllers\BlogController;
 
 
 Route::middleware('login')->group(function (){
-    //Route::post('encode',[DataCrypter::class,'crypter']);
-    //Route::post('decode',[DataCrypter::class,'crypter']);
+    Route::post('encode',[DataCrypter::class,'crypter']);
+    Route::post('decode',[DataCrypter::class,'crypter']);
+    Route::post('test',function (){ return "basarili"; });
+    Route::post('create-post',[BlogController::class,'createPost']);
 });
 
-Route::post('encode',[DataCrypter::class,'crypter']);
-
-Route::post('decode',[DataCrypter::class,'crypter']);
 
 Route::post('login',[ApiController::class,'login']);
 
