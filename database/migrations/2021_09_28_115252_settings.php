@@ -16,7 +16,7 @@ class Settings extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('setting');
-            $table->string('option');
+            $table->longText('option');
             $table->string('create_date');
             $table->string('update_date');
         });
