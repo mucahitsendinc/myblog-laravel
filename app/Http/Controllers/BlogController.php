@@ -60,7 +60,7 @@ class BlogController extends Controller
                         ->orwhere('email',$email)
                         ->orwhere('message',$message)
                         ->get();
-        if(!empty($control)){
+        if(count($control)<1){
             return response()->json([
                 'status'=>'error',
                 'message'=>'Son gönderdiğiniz mesajınız incelenene kadar yeni bir mesaj gönderemezsiniz.',
