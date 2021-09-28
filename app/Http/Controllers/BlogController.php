@@ -64,7 +64,8 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Son gönderdiğiniz mesajınız incelenene kadar yeni bir mesaj gönderemezsiniz.',
-                'other'=>$control
+                'other'=>$control,
+                'count'=>count($control)
             ],401);
         }
 
