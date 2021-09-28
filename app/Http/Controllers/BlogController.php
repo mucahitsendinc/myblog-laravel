@@ -35,4 +35,7 @@ class BlogController extends Controller
             'data'=>$getInfos
         ],200);
     }
+    public function sendContact(Request $request){
+        return $_SERVER['REMOTE_ADDR'];
+    }
 }
