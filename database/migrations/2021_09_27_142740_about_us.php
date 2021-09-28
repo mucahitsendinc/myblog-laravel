@@ -151,6 +151,6 @@ class AboutUs extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('about_us');
     }
 }

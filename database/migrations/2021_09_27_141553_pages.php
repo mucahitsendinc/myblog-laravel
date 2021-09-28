@@ -62,6 +62,6 @@ class Pages extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('pages');
     }
 }

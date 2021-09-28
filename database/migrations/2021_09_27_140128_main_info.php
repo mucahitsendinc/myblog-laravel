@@ -112,6 +112,6 @@ class MainInfo extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('main_info');
     }
 }
