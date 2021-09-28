@@ -56,9 +56,12 @@ class BlogController extends Controller
         }
 
         $control=DB::table('contact')
-                        ->where('remote_ip',$ip)
-                        ->orwhere('email',$email)
-                        ->orwhere('message',$message)
+                        ->where(function($query) use ($ip,$email,$message){
+                            $query->where('remote_ip',$ip)
+                                ->orwhere('email',$email)
+                                ->orwhere('message',$message);
+                        })
+                        ->where('status',0)
                         ->get();
         if(count($control)>0){
             return response()->json([
