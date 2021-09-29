@@ -24,6 +24,7 @@ Route::middleware('login')->group(function (){
         Artisan::call('config:clear');
         Artisan::call('cache:clear');
         Artisan::call('key:generate');
+        dd('cache temizlendi!');
     });
 
 
