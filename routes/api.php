@@ -3,8 +3,8 @@
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DataCrypter;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogAdminController;
 
 
 Route::middleware('login')->group(function (){
@@ -31,8 +31,8 @@ Route::middleware('login')->group(function (){
     /**
      * Blog Admin ROUTES
     */
-    Route::post('create-post',[BlogController::class,'createPost']);
-    Route::post('create-recommended',[BlogController::class,'createRecommended']);
+    Route::post('create-post',[BlogAdminController::class,'createPost']);
+    Route::post('create-recommended',[BlogAdminController::class,'createRecommended']);
 
 });
 
@@ -40,6 +40,8 @@ Route::middleware('login')->group(function (){
 Route::post('login',[ApiController::class,'login']);
 
 Route::post('main-info',[BlogController::class,'getMainInfo']);
+
+Route::post('posts',[BlogController::class,'getPosts']);
 
 Route::post('about-us',[BlogController::class,'getAboutUs']);
 
