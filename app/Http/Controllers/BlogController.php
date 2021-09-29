@@ -199,6 +199,11 @@ class BlogController extends Controller
             $i=0;
             foreach($getPosts as $post){
                 $i++;
+                $tags=[];
+                $getTags=DB::table('tags')->where('post_id',$post->id)->orderBy('id', 'desc')->get(['tag']);
+                foreach ($getTags as $tag){
+                    array_push($tags,$tag->tag);
+                }
                 $newPost=[
                     'unid'=>md5($post->title).'id-'.$i,
                     'id'=>$crypt->crypt_router($post->id."",false,'encode'),
@@ -206,7 +211,7 @@ class BlogController extends Controller
                     'description'=>$post->description,
                     'url'=>$post->url,
                     'image'=>$post->image,
-                    'content'=>$post->content
+                    'tags'=>$tags
                 ];
                 array_push($posts,$newPost);
             }
