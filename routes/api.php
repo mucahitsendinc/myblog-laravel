@@ -43,6 +43,8 @@ Route::post('main-info',[BlogController::class,'getMainInfo']);
 
 Route::post('posts',[BlogController::class,'getPosts']);
 
+Route::post('post-detail',[BlogController::class,'getPostDetail']);
+
 Route::post('comments',[BlogController::class,'getComments']);
 
 Route::post('about-us',[BlogController::class,'getAboutUs']);

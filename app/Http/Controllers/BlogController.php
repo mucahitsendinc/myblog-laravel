@@ -226,7 +226,49 @@ class BlogController extends Controller
             'data'=>$posts
         ],200);
     }
+    public function getPostDetail(Request $request){
+        $crypt=new DataCrypter;
+        $url=$request->url;
+        $postDetail=[];
+        try {
+            $getPostDetail=DB::table('posts')->where('status',0)->where('url',$url)->first([
+                'title','description','image','content','create_date','id'
+            ]);
 
+            $comments=DB::table('comments')->where('status',0)->where('post_id',$getPostDetail->id)->get([
+                'name','email','comment','create_date'
+            ]);
+            $newComments=[];
+            $i=0;
+            foreach($comments as $comment){
+                $i++;
+                $newComment=[
+                    'uid'=> md5($comment->name).'id-'.$i,
+                    'name'=>$comment->name,
+                    'comment'=>$comment->comment,
+                    'date'=>$comment->create_date
+                ];
+                array_push($newComments,$newComment);
+            }
+
+            unset($getPostDetail->id);
+            $add=[
+                'detail'=>$getPostDetail,
+                'comments'=>$newComments
+            ];
+            array_push($postDetail,$add);
+
+        }catch (\Exception $ex){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Teknik bir hata oluştu'
+            ],403);
+        }
+        return response()->json([
+            'status'=>'success',
+            'data'=>$postDetail
+        ],200);
+    }
     public function getComments(Request $request){
         $crypt=new DataCrypter;
 
