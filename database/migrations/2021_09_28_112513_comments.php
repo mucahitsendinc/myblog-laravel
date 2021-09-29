@@ -17,6 +17,7 @@ class Comments extends Migration
             $table->id();
             $table->bigInteger('post_id');
             $table->string('name');
+            $table->string('email');
             $table->text('comment');
             $table->string('remote_ip');
             $table->integer('status');
