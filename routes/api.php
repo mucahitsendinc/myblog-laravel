@@ -8,11 +8,31 @@ use App\Http\Controllers\BlogController;
 
 
 Route::middleware('login')->group(function (){
+    /**
+     * Blog Test Routes
+     */
     Route::post('encode',[DataCrypter::class,'crypter']);
     Route::post('decode',[DataCrypter::class,'crypter']);
     Route::post('test',function (){ return "basarili"; });
+    Route::get('migrate',function(){
+        Artisan::call('migrate:refresh');
+        dd('migrated!');
+    });
+    Route::get('reboot',function(){
+        Artisan::call('view:clear');
+        Artisan::call('route:clear');
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('key:generate');
+    });
+
+
+    /**
+     * Blog Admin ROUTES
+    */
     Route::post('create-post',[BlogController::class,'createPost']);
     Route::post('create-recommended',[BlogController::class,'createRecommended']);
+
 });
 
 
