@@ -108,7 +108,7 @@ class BlogController extends Controller
 
         if(strlen($name)<2 || strlen($name)>25){ $error="Ad çok kısa/uzun"; }
         else if(strlen($surname)<2 || strlen($surname)>25){ $error="Soyad çok kısa/uzun"; }
-        else if(strlen($comment)>255){ $error="Yorum uzun!"; }
+        else if(strlen($comment)<10 ||strlen($comment)>255){ $error="Yorum kısa/uzun"; }
         else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){ $error="Geçersiz e-posta"; }
 
         if(isset($error)){
@@ -191,7 +191,7 @@ class BlogController extends Controller
     public function getPosts(){
         $crypt=new DataCrypter;
         try {
-            $getPosts=DB::table('posts')->where('status',0)->get([
+            $getPosts=DB::table('posts')->where('status',0)->orderBy('id', 'desc')->get([
                 'title','description','url','image','content','id'
             ]);
 
@@ -200,7 +200,7 @@ class BlogController extends Controller
             foreach($getPosts as $post){
                 $i++;
                 $newPost=[
-                    'unid'=>'post-'.$i,
+                    'unid'=>md5($post->title).'id-'.$i,
                     'id'=>$crypt->crypt_router($post->id."",false,'encode'),
                     'title'=>$post->title,
                     'description'=>$post->description,
@@ -213,7 +213,7 @@ class BlogController extends Controller
         }catch(\Exception $ex){
             return response()->json([
                 'status'=>'error',
-                'message'=>'Teknik bir hata oluştu'.$ex
+                'message'=>'Teknik bir hata oluştu'
             ],403);
         }
         return response()->json([
@@ -222,5 +222,39 @@ class BlogController extends Controller
         ],200);
     }
 
+    public function getComments(Request $request){
+        $crypt=new DataCrypter;
+
+        $post=$request->post;
+
+
+        try {
+            $comments=DB::table('comments')->where('status',0)->where('post_id',$crypt->crypt_router($post,false,'decode'))->orderBy('id', 'desc')->get([
+                'name','email','comment','create_date'
+            ]);
+            $newComments=[];
+            $i=0;
+            foreach($comments as $comment){
+                $i++;
+                $newComment=[
+                    'uid'=> md5($comment->name).'id-'.$i,
+                    'name'=>$comment->name,
+                    'comment'=>$comment->comment,
+                    'date'=>$comment->create_date
+                ];
+                array_push($newComments,$newComment);
+            }
+        }catch (\Exception $ex){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Teknik bir hata oluştu'
+            ],403);
+        }
+
+        return response()->json([
+            'status'=>'success',
+            'data'=>$newComments
+        ],200);
+    }
 
 }
