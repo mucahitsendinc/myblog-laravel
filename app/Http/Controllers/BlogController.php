@@ -318,7 +318,7 @@ class BlogController extends Controller
     }
     public function getRecommended(){
         $crypt=new DataCrypter;
-        return $crypt->crypt_router('2',false,'encode');
+        //return $crypt->crypt_router('2',false,'encode');
         try {
             $getRecommended=DB::table('recommendeds')->where('recommendeds.status',0)
                 ->join('posts','recommendeds.post_id','=','posts.id')
