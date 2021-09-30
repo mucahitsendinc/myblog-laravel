@@ -342,6 +342,7 @@ class BlogController extends Controller
                     'description'=>$post->description,
                     'url'=>$post->url,
                     'image'=>$post->image,
+                    'date'=>$post->create_date,
                     'tags'=>$tags
                 ];
                 array_push($posts,$newPost);
