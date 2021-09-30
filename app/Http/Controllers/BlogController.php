@@ -264,7 +264,7 @@ class BlogController extends Controller
                 array_push($tags,$tag->tag);
             }
             //unset($getPostDetail->id);
-            $getPostDetail->id=$crypt->crypt_router($getPostDetail->id,false,'encode');
+            $getPostDetail->id=$crypt->crypt_router($getPostDetail->id."",false,'encode');
             $add=[
                 'detail'=>$getPostDetail,
                 'comments'=>$newComments,
