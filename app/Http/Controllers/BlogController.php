@@ -263,7 +263,8 @@ class BlogController extends Controller
             foreach ($getTags as $tag){
                 array_push($tags,$tag->tag);
             }
-            unset($getPostDetail->id);
+            //unset($getPostDetail->id);
+            $getPostDetail->id=$crypt->crypt_router($getPostDetail->id,false,'encode');
             $add=[
                 'detail'=>$getPostDetail,
                 'comments'=>$newComments,
