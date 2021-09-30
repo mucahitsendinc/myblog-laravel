@@ -25,6 +25,7 @@ class BlogAdminController extends Controller
         $content=$request->content??'';
         $tags=$request->tags??[];
 
+
         $tags=$tags!=[] ? json_decode($tags) : [];
 
         if(strlen($title)<3 || strlen($title)>255){ $error="Başık uzun/kısa!"; }
@@ -66,7 +67,6 @@ class BlogAdminController extends Controller
             'update_date'=>date('Y-m-d H:i:s')
         ]);
         if($save){
-
             foreach ($tags as $tag){
                 $save=DB::table('tags')->insert([
                     'post_id'=>$save,

@@ -49,6 +49,9 @@ Route::post('comments',[BlogController::class,'getComments']);
 
 Route::post('about-us',[BlogController::class,'getAboutUs']);
 
+Route::post('recommended',[BlogController::class,'getRecommended']);
+
 Route::post('send-contact',[BlogController::class,'sendContact']);
 
 Route::post('send-comment',[BlogController::class,'sendComment']);
+

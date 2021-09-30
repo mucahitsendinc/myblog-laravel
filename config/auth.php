@@ -40,7 +40,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],'api' => [
-            'driver' => 'passport',
+            'driver' => 'session',
             'provider' => 'users',
             'hash' => false
         ],

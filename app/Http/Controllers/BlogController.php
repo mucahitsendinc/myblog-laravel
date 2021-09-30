@@ -235,6 +235,13 @@ class BlogController extends Controller
                 'title','description','image','content','create_date','id'
             ]);
 
+            if(empty($getPostDetail)){
+                return response()->json([
+                    'status'=>'error',
+                    'message'=>'Gönderi bulunamadı.Silinmiş veya yayından kaldırılmış olabilir'
+                ],403);
+            }
+
             $comments=DB::table('comments')->where('status',0)->where('post_id',$getPostDetail->id)->get([
                 'name','email','comment','create_date'
             ]);
@@ -261,7 +268,7 @@ class BlogController extends Controller
         }catch (\Exception $ex){
             return response()->json([
                 'status'=>'error',
-                'message'=>'Teknik bir hata oluştu'
+                'message'=>'Teknik bir hata oluştu'.$ex
             ],403);
         }
         return response()->json([
@@ -301,6 +308,46 @@ class BlogController extends Controller
         return response()->json([
             'status'=>'success',
             'data'=>$newComments
+        ],200);
+    }
+    public function getRecommended(){
+        $crypt=new DataCrypter;
+        try {
+            $getRecommended=DB::table('recommendeds')->where('recommendeds.status',0)
+                ->join('posts','recommendeds.post_id','=','posts.id')
+                ->orderBy('arrangement', 'desc')
+                ->get([
+                    'recommendeds.post_id','posts.create_date','posts.title','posts.description','posts.url','posts.image'
+                ]);
+            $posts=[];
+            $i=0;
+            foreach($getRecommended as $post){
+                $i++;
+                $tags=[];
+                $getTags=DB::table('tags')->where('post_id',$post->post_id)->orderBy('id', 'desc')->get(['tag']);
+                foreach ($getTags as $tag){
+                    array_push($tags,$tag->tag);
+                }
+                $newPost=[
+                    'unid'=>md5($post->title).'id-'.$i,
+                    'id'=>$crypt->crypt_router($post->post_id."",false,'encode'),
+                    'title'=>$post->title,
+                    'description'=>$post->description,
+                    'url'=>$post->url,
+                    'image'=>$post->image,
+                    'tags'=>$tags
+                ];
+                array_push($posts,$newPost);
+            }
+        }catch(\Exception $ex){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Teknik bir hata oluştu'.$ex
+            ],403);
+        }
+        return response()->json([
+            'status'=>'success',
+            'data'=>$posts
         ],200);
     }
 
