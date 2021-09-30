@@ -247,6 +247,7 @@ class BlogController extends Controller
             ]);
             $newComments=[];
             $i=0;
+
             foreach($comments as $comment){
                 $i++;
                 $newComment=[
@@ -257,11 +258,16 @@ class BlogController extends Controller
                 ];
                 array_push($newComments,$newComment);
             }
-
+            $tags=[];
+            $getTags=DB::table('tags')->where('post_id',$getPostDetail->id)->orderBy('id', 'desc')->get(['tag']);
+            foreach ($getTags as $tag){
+                array_push($tags,$tag->tag);
+            }
             unset($getPostDetail->id);
             $add=[
                 'detail'=>$getPostDetail,
-                'comments'=>$newComments
+                'comments'=>$newComments,
+                'tags'=>$tags
             ];
             array_push($postDetail,$add);
 
@@ -312,6 +318,7 @@ class BlogController extends Controller
     }
     public function getRecommended(){
         $crypt=new DataCrypter;
+        return $crypt->crypt_router('2',false,'encode');
         try {
             $getRecommended=DB::table('recommendeds')->where('recommendeds.status',0)
                 ->join('posts','recommendeds.post_id','=','posts.id')
