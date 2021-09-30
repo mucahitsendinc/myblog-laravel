@@ -16,7 +16,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'İletişim formu yetkili tarafından devre dışı bırakılmış durumda. Lütfen daha sonra tekrar deneyin'
-            ],403);
+            ],200);
         }
 
         $name=$request->name;
@@ -34,7 +34,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>$error
-            ],403);
+            ],200);
         }
 
         $control=DB::table('contact')
@@ -49,7 +49,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Son gönderdiğiniz mesajınız incelenene kadar yeni bir mesaj gönderemezsiniz'
-            ],403);
+            ],200);
         }
 
         $save=DB::table('contact')->insert([
@@ -72,7 +72,7 @@ class BlogController extends Controller
         return response()->json([
             'status'=>'error',
             'message'=>'Teknik bir hata oluştu lütfen daha sonra tekrar deneyin'
-        ],403);
+        ],200);
 
 
     }
@@ -85,7 +85,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Yorum formu yetkili tarafından devre dışı bırakılmış durumda. Lütfen daha sonra tekrar deneyin'
-            ],403);
+            ],200);
         }
 
         $post=$request->post??'';
@@ -101,7 +101,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Gönderi yayından kaldırıldı veya bulunamadığı için yorumunuz gönderilemedi'
-            ],403);
+            ],200);
         }
 
         $post=$checkPost->id;
@@ -115,7 +115,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>$error
-            ],403);
+            ],200);
         }
 
         $control=DB::table('comments')
@@ -132,7 +132,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Her gönderiye yalnızca bir yorum yapabilirsiniz'
-            ],403);
+            ],200);
         }
 
         $save=DB::table('comments')->insert([
@@ -156,7 +156,7 @@ class BlogController extends Controller
         return response()->json([
             'status'=>'error',
             'message'=>'Teknik bir hata oluştu lütfen daha sonra tekrar deneyin'
-        ],403);
+        ],200);
 
 
     }
@@ -167,7 +167,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Teknik bir hata oluştu'
-            ],403);
+            ],200);
         }
         return response()->json([
             'status'=>'success',
@@ -181,7 +181,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Teknik bir hata oluştu'
-            ],403);
+            ],200);
         }
         return response()->json([
             'status'=>'success',
@@ -219,7 +219,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Teknik bir hata oluştu'
-            ],403);
+            ],200);
         }
         return response()->json([
             'status'=>'success',
@@ -239,7 +239,7 @@ class BlogController extends Controller
                 return response()->json([
                     'status'=>'error',
                     'message'=>'Gönderi bulunamadı.Silinmiş veya yayından kaldırılmış olabilir'
-                ],403);
+                ],200);
             }
 
             $comments=DB::table('comments')->where('status',0)->where('post_id',$getPostDetail->id)->get([
@@ -275,7 +275,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Teknik bir hata oluştu'.$ex
-            ],403);
+            ],200);
         }
         return response()->json([
             'status'=>'success',
@@ -308,7 +308,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Teknik bir hata oluştu'
-            ],403);
+            ],200);
         }
 
         return response()->json([
@@ -351,7 +351,7 @@ class BlogController extends Controller
             return response()->json([
                 'status'=>'error',
                 'message'=>'Teknik bir hata oluştu'.$ex
-            ],403);
+            ],200);
         }
         return response()->json([
             'status'=>'success',
