@@ -23,9 +23,8 @@ class FileUploadController extends Controller
             $image=$request->formData['file'];
             $name=md5(time());
             try {
-                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-                \Image::make($request->formData['file'])->save(public_path('images/').$name);
-                $path='images/'.$name;
+                $name = time().'_'.substr($image, 0, strpos($image, ';'));
+                $path=$image->storeAs('uploads', $name, 'public');
                 $date=date('Y-m-d H:i:s')."";
                 DB::table('images')->insert(['name'=>$name,'path'=>$path,'create_date'=>$date,'update_date'=>$date]);
                 return response()->json(['status'=>'success','message'=>'Resim ekleme işlemi başarılı'],200);
