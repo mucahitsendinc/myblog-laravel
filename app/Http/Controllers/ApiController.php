@@ -19,7 +19,7 @@ class ApiController extends Controller
             $check=DB::table('settings')->where('setting','access')->first(['option']);
             if(strlen($check->option)>0 && $check->option==$access){
                 $newToken=$crypt->crypt_router($request->password,true,'encode');
-                return response()->json(['success'=>true,'token'=>$newToken],401);
+                return response()->json(['success'=>true,'token'=>$newToken],200);
             }
         }
         return response()->json(['success'=>false,'message'=>'Giriş bilgileri hatalı'],401);
@@ -37,21 +37,5 @@ class ApiController extends Controller
         }
         return false;
     }
-
-    public function register(Request $request){
-        $insert=DB::table('users')->insert([
-                                'name'=>'mucahitsndc',
-                                'email'=>'me@mucahitsendinc.com',
-                                'password'=>'Mucahitsndc52.',
-                                'created_at'=>date('Y-m-d H:i:s'),
-                                'updated_at'=>date('Y-m-d H:i:s')
-                                ]);
-        return $request->all();
-    }
-
-
-
-
-
 
 }
