@@ -27,13 +27,13 @@ Route::middleware('login')->group(function (){
         dd('cache temizlendi!');
     });
 
-
     /**
      * Blog Admin ROUTES
     */
     Route::post('create-post',[BlogAdminController::class,'createPost']);
     Route::post('create-recommended',[BlogAdminController::class,'createRecommended']);
     Route::post('new-image',[FileUploadController::class,'newImage']);
+
 });
 
 

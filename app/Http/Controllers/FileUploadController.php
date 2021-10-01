@@ -26,6 +26,9 @@ class FileUploadController extends Controller
             $name=time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
             $path=env("IMAGEKIT_URL_END_POINT").'/images/'.$name;
             $date=date('Y-m-d H:i:s');
+            if(strpos($name,'.png')==false && strpos($name,'.jpg')==false && strpos($name,'.jpeg')==false && strpos($name,'.gif')==false){
+                return response()->json(['status'=>false,'message'=>'Yalnızca görsel yükleyebilirsiniz'],403);
+            }
             try {
                 $imageKit = new ImageKit(
                     env("IMAGEKIT_PUBLIC_KEY"),
