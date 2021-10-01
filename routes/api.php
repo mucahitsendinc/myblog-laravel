@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogAdminController;
-
+use App\Http\Controllers\FileUploadController;
 
 Route::middleware('login')->group(function (){
     /**
@@ -33,7 +33,7 @@ Route::middleware('login')->group(function (){
     */
     Route::post('create-post',[BlogAdminController::class,'createPost']);
     Route::post('create-recommended',[BlogAdminController::class,'createRecommended']);
-
+    Route::post('new-image',[FileUploadController::class,'newImage']);
 });
 
 
