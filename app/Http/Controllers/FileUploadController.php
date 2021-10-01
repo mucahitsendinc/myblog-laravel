@@ -23,6 +23,7 @@ class FileUploadController extends Controller
             $image=$request->formData['file'];
             $name=md5(time());
             try {
+                return $image->getClientOriginalName();
                 $name = time().'_'.substr($image, 0, strpos($image, ';'));
                 $path=$image->storeAs('uploads', $image, 'public');
                 $date=date('Y-m-d H:i:s')."";
