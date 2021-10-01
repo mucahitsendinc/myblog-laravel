@@ -16,6 +16,7 @@ class Images extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('path');
             $table->string('create_date');
             $table->string('update_date');
         });
@@ -29,6 +30,6 @@ class Images extends Migration
      */
     public function down()
     {
-        Schema::drop('settings');
+        Schema::drop('images');
     }
 }

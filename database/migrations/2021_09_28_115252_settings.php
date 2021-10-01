@@ -26,6 +26,7 @@ class Settings extends Migration
             ['setting'=>'comment','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')],
             ['setting'=>'post','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')],
             ['setting'=>'recommended','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')],
+            ['setting'=>'imageupload','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')],
             ['setting'=>'search','option'=>'enable','create_date'=>date('Y-m-d H:i:s'),'update_date'=>date('Y-m-d H:i:s')]
         ]);
     }
