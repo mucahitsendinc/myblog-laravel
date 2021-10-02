@@ -21,38 +21,7 @@ class Pages extends Migration
             $table->string('create_date');
             $table->string('update_date');
         });
-        DB::table('pages')->insert(
-            array(
-                [
-                    'name'=>'Ana Sayfa',
-                    'url'=>'/',
-                    'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
-                ],
-                [
-                    'name'=>'Blogum',
-                    'url'=>'/blogum',
-                    'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
-                ],
-                [
-                    'name'=>'Hakkımda',
-                    'url'=>'/hakkimda',
-                    'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
-                ],
-                [
-                    'name'=>'İletişim',
-                    'url'=>'/iletisim',
-                    'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
-                ]
-            )
-        );
+
     }
 
     /**
