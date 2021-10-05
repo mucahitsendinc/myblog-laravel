@@ -21,7 +21,7 @@ class Contact extends Migration
             $table->string('remote_ip');
             $table->integer('status');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

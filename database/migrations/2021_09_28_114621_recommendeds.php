@@ -19,7 +19,7 @@ class Recommendeds extends Migration
             $table->bigInteger('arrangement');
             $table->integer('status');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->foreign('post_id')->references('id')->on('posts');
         });
     }

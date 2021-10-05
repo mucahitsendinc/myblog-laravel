@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Recommended;
 use Illuminate\Http\Request;
 use App\Http\Controllers\DataCrypter;
-use DB;
+use App\Models\Setting;
+use App\Models\Post;
 
 class BlogAdminController extends Controller
 {
@@ -91,9 +93,7 @@ class BlogAdminController extends Controller
         ],403);
     }
     public function createRecommended(Request $request){
-
-        $check=DB::table('settings')->where('setting','recommended')->first(['option']);
-
+        $check=Setting::where('setting','recommended')->first(['option']);
         if($check->option!="enable"){
             return response()->json([
                 'status'=>'error',
@@ -103,49 +103,41 @@ class BlogAdminController extends Controller
 
         $crypt=new DataCrypter;
         $post=$request->post;
-
-        $checkPost=DB::table('posts')->where('id',$crypt->crypt_router($post,false,'decode'))->where('status',0)->first(['id']);
+        $checkPost=Post::where('id',$crypt->crypt_router($post,false,'decode'))->where('status',0)->first(['id']);
         if(empty($checkPost) || $checkPost->id!=$crypt->crypt_router($post,false,'decode')){
             return response()->json([
                 'status'=>'error',
                 'message'=>'Gönderi yayından kaldırıldı veya bulunamadığı için yorumunuz gönderilemedi'
             ],403);
         }
-
         $post=$checkPost->id;
-
-        $max=((DB::table('recommendeds')->max('arrangement'))*1)+1;
-
-        $checkRecommend=DB::table('recommendeds')->where('post_id',$post)->update(['arrangement'=>$max]);
+        $max=((Recommended::max('arrangement'))*1)+1;
+        $checkRecommend=Recommended::where('post_id',$post)->update(['arrangement'=>$max]);
         if($checkRecommend){
             return response()->json([
                 'status'=>'success',
                 'message'=>'Gönderi zaten öne çıkanlarda olduğu için öne çıkanlar listesinde en üst sıraya alındı'
             ],200);
         }else{
-            $save=DB::table('recommendeds')->insert([
-                'post_id'=>$post,
-                'arrangement'=>$max,
-                'status'=>0,
-                'create_date'=>date('Y-m-d H:i:s'),
-                'update_date'=>date('Y-m-d H:i:s')
-            ]);
-
-            if($save){
+            try {
+                $recommended=Recommended::create([
+                    'post_id'=>$post,
+                    'arrangement'=>$max,
+                    'status'=>0,
+                    'create_date'=>date('Y-m-d H:i:s'),
+                    'update_date'=>date('Y-m-d H:i:s')
+                ]);
                 return response()->json([
                     'status'=>'success',
                     'message'=>'Gönderi başarı ile öne çıkanlara eklendi'
                 ],200);
-            }else{
+            }catch (\Exception $ex){
                 return response()->json([
                     'status'=>'error',
                     'message'=>'Teknik bir hata oluştu lütfen daha sonra tekrar deneyin'
                 ],403);
             }
-
         }
-
-
         return response()->json([
             'status'=>'error',
             'message'=>'Teknik bir hata oluştu lütfen daha sonra tekrar deneyin'
