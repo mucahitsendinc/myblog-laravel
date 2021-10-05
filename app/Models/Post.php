@@ -9,6 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $table="posts";
+    protected $fillable=['title','description','page_id','image_id','content','status'];
 
     public function getImage(){
         return $this->hasOne(Image::class,'id','image_id');

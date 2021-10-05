@@ -7,12 +7,26 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\DataCrypter;
 use App\Models\Setting;
 use App\Models\Post;
+use App\Models\Image;
+use App\Models\Page;
+use App\Models\Tag;
 
 class BlogAdminController extends Controller
 {
+    function format_uri( $string, $separator = '-' )
+    {
+        $accents_regex = '~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i';
+        $special_cases = array( '&' => 'and', "'" => '');
+        $string = mb_strtolower( trim( $string ), 'UTF-8' );
+        $string = str_replace( array_keys($special_cases), array_values( $special_cases), $string );
+        $string = preg_replace( $accents_regex, '$1', htmlentities( $string, ENT_QUOTES, 'UTF-8' ) );
+        $string = preg_replace("/[^a-z0-9]/u", "$separator", $string);
+        $string = preg_replace("/[$separator]+/u", "$separator", $string);
+        return $string;
+    }
     public function createPost(Request $request){
 
-        $check=DB::table('settings')->where('setting','post')->first(['option']);
+        $check=Setting::where('setting','post')->first(['option']);
         if($check->option!="enable"){
             return response()->json([
                 'status'=>'error',
@@ -22,7 +36,6 @@ class BlogAdminController extends Controller
 
         $title=$request->title??'';
         $desc=$request->description??'';
-        $url=$request->url??'';
         $image=$request->image??'';
         $content=$request->content??'';
         $tags=$request->tags??[];
@@ -32,10 +45,16 @@ class BlogAdminController extends Controller
 
         if(strlen($title)<3 || strlen($title)>255){ $error="Başık uzun/kısa!"; }
         else if(strlen($desc)>255){ $error="Açıklama uzun!"; }
-        else if(strlen($url)<3 || strlen($url)>255){ $error="Url uzun/kısa!"; }
         else if(strlen($image)<3 || strlen($image)>255){ $error="Resim uzun/kısa!"; }
         else if(strlen($content)<10){ $error="İçerik uzun/kısa!"; }
 
+        $imageCheck=Image::where('name',$image)->orWhere('path',$image)->first(['id']);
+        if(empty($imageCheck) || !isset($imageCheck)){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Görsel bulunamadı.'
+            ],403);
+        }
         if(isset($error)){
             return response()->json([
                 'status'=>'error',
@@ -43,10 +62,8 @@ class BlogAdminController extends Controller
             ],403);
         }
 
-        $control=DB::table('posts')
-            ->where(function($query) use ($title,$url){
-                $query->where('title',$title)
-                    ->orwhere('url',$url);
+        $control=Post::where(function($query) use ($title){
+                $query->where('title',$title);
             })
             ->where('status',0)
             ->get();
@@ -58,34 +75,47 @@ class BlogAdminController extends Controller
             ],403);
         }
 
-        $save=DB::table('posts')->insertGetId([
-            'title'=>$title,
-            'description'=>$desc,
-            'url'=>$url,
-            'image'=>$image,
-            'content'=>$content,
-            'status'=>0,
-            'create_date'=>date('Y-m-d H:i:s'),
-            'update_date'=>date('Y-m-d H:i:s')
-        ]);
-        if($save){
+        try {
+            $page=Page::create([
+                'name'=>$title,
+                'url'=>$this->format_uri($title),
+                'status'=>0
+            ]);
+            $page->save();
+            $post=Post::create([
+                'title'=>$title,
+                'description'=>$desc,
+                'page_id'=>$page->id,
+                'image_id'=>$imageCheck->id,
+                'content'=>$content,
+                'status'=>0
+            ]);
+            $post->save();
             foreach ($tags as $tag){
-                $save=DB::table('tags')->insert([
-                    'post_id'=>$save,
-                    'tag'=>$tag
-                ]);
-                if(!$save){
+                try {
+                    $tag=Tag::create([
+                        'post_id'=>$post->id,
+                        'tag'=>$tag
+                    ]);
+                    $tag->save();
+                }catch (\Exception $ex){
                     return response()->json([
                         'status'=>'error',
                         'message'=>'Post oluşturuldu fakat Tag oluşturulurken bir hata oluştu'
                     ],403);
                 }
+
             }
 
             return response()->json([
                 'status'=>'success',
                 'message'=>'Post başarı ile oluşturuldu'
             ],200);
+        }catch (\Exception $ex){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Teknik bir hata oluştu lütfen tekrar deneyin.'.$ex
+            ],403);
         }
         return response()->json([
             'status'=>'error',
@@ -127,6 +157,7 @@ class BlogAdminController extends Controller
                     'create_date'=>date('Y-m-d H:i:s'),
                     'update_date'=>date('Y-m-d H:i:s')
                 ]);
+                $recommended->save();
                 return response()->json([
                     'status'=>'success',
                     'message'=>'Gönderi başarı ile öne çıkanlara eklendi'
