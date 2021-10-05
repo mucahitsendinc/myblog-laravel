@@ -10,6 +10,8 @@ use App\Models\Recommended;
 use App\Models\Setting;
 use App\Models\Comment;
 use App\Models\Contact;
+use App\Models\MainInfo;
+use App\Models\AboutUs;
 
 class BlogController extends Controller
 {
@@ -160,7 +162,7 @@ class BlogController extends Controller
     }
     public function getMainInfo(){
         try {
-            $getInfos=DB::table('main_info')->where('title','!=','access')->where('status',0)->get(['title','info']);
+            $getInfos=MainInfo::where('title','!=','access')->where('status',0)->get(['title','info']);
         }catch (\Exception $ex){
             return response()->json([
                 'status'=>'error',
@@ -174,7 +176,7 @@ class BlogController extends Controller
     }
     public function getAboutUs(){
         try {
-            $getInfos=DB::table('about_us')->where('status',0)->get(['title','list']);
+            $getInfos=AboutUs::where('status',0)->get(['title','list']);
         }catch (\Exception $ex){
             return response()->json([
                 'status'=>'error',
