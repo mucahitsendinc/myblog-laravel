@@ -7,9 +7,12 @@ use ImageKit\ImageKit;
 use App\Models\Setting;
 use App\Models\Image;
 
-class FileUploadController extends Controller
+class ImageController extends Controller
 {
     //
+    public function getImages(Request $request){
+        return Image::get();
+    }
     public function newImage(Request $request){
 
         $check=Setting::where('setting','imageupload')->first(['option']);

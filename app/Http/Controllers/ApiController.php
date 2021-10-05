@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DataCrypter;
 use App\Models\Setting;
 
-class ImageController extends Controller
+class ApiController extends Controller
 {
 
 
