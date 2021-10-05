@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use DB;
 
 class PagesSeeder extends Seeder
 {
@@ -19,29 +20,29 @@ class PagesSeeder extends Seeder
                     'name'=>'Ana Sayfa',
                     'url'=>'/',
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
                 [
                     'name'=>'Blogum',
                     'url'=>'/blogum',
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
                 [
                     'name'=>'Hakkımda',
                     'url'=>'/hakkimda',
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
                 [
                     'name'=>'İletişim',
                     'url'=>'/iletisim',
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ]
             )
         );

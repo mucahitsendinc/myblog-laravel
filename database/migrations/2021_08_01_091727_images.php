@@ -14,11 +14,11 @@ class Images extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('path');
-            $table->string('create_date');
-            $table->string('update_date');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
     }

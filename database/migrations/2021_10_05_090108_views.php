@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Comments extends Migration
+class Views extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class Comments extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('post_id');
-            $table->string('name');
-            $table->string('email');
-            $table->text('comment');
-            $table->string('remote_ip');
-            $table->integer('status');
+        Schema::create('views', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ip');
+            $table->string('previous');
+            $table->unsignedBigInteger('page_id');
+            $table->bigInteger('count');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('page_id')->references('id')->on('pages');
         });
     }
 
@@ -34,6 +32,6 @@ class Comments extends Migration
      */
     public function down()
     {
-        Schema::drop('comments');
+        Schema::drop('views');
     }
 }

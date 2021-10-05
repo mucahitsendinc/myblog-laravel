@@ -18,8 +18,8 @@ class AboutUs extends Migration
             $table->string('title');
             $table->longText('list');
             $table->integer('status');
-            $table->string('create_date');
-            $table->string('update_date');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
 
     }

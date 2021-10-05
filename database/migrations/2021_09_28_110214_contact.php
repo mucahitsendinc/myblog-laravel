@@ -20,8 +20,8 @@ class Contact extends Migration
             $table->longText('message');
             $table->string('remote_ip');
             $table->integer('status');
-            $table->string('create_date');
-            $table->string('update_date');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

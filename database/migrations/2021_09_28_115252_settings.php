@@ -17,8 +17,8 @@ class Settings extends Migration
             $table->id();
             $table->string('setting');
             $table->longText('option');
-            $table->string('create_date');
-            $table->string('update_date');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

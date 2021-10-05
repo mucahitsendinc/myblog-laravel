@@ -15,11 +15,12 @@ class Recommendeds extends Migration
     {
         Schema::create('recommendeds', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('post_id');
+            $table->unsignedBigInteger('post_id');
             $table->bigInteger('arrangement');
             $table->integer('status');
-            $table->string('create_date');
-            $table->string('update_date');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 

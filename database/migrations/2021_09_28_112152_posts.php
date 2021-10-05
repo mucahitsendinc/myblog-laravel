@@ -14,15 +14,17 @@ class Posts extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('title');
             $table->string('description');
-            $table->string('url');
-            $table->string('image');
+            $table->unsignedBigInteger('page_id');
+            $table->unsignedBigInteger('image_id');
             $table->longText('content');
             $table->integer('status');
-            $table->string('create_date');
-            $table->string('update_date');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->foreign('image_id')->references('id')->on('images');
+            $table->foreign('page_id')->references('id')->on('pages');
         });
     }
 

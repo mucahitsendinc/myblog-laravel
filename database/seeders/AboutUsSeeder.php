@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use DB;
 
 class AboutUsSeeder extends Seeder
 {
@@ -21,8 +22,8 @@ class AboutUsSeeder extends Seeder
                         'Dehasoft 5 Ay'
                     ]),
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
                 [
                     'title'=>'Eğitim',
@@ -31,8 +32,8 @@ class AboutUsSeeder extends Seeder
                         'Otocenter Mesleki ve Teknik Anadolu Lisesi ( Veri Tabanı Programcılığı ) '
                     ]),
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
                 [
                     'title'=>'Ödül & Başarı',
@@ -42,8 +43,8 @@ class AboutUsSeeder extends Seeder
 
                     ]),
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
                 [
                     'title'=>'Yetenek',
@@ -71,8 +72,8 @@ class AboutUsSeeder extends Seeder
 
                     ]),
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
                 [
                     'title'=>'Projeler',
@@ -89,8 +90,8 @@ class AboutUsSeeder extends Seeder
 
                     ]),
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
                 [
                     'title'=>'Sertifikalar',
@@ -109,7 +110,7 @@ class AboutUsSeeder extends Seeder
                         'Sıfırdan ileri seviye laravel ( Udemy ) '
                     ]),
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
+                    'created_at'=>date('Y-m-d H:i:s'),
                     'update_date'=>date('Y-m-d H:i:s')
                 ],
                 [
@@ -128,8 +129,8 @@ class AboutUsSeeder extends Seeder
 
                     ]),
                     'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'created_at'=>date('Y-m-d H:i:s'),
+                    'updated_at'=>date('Y-m-d H:i:s')
                 ],
 
             )

@@ -15,8 +15,11 @@ class Tags extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('post_id');
+            $table->unsignedBigInteger('post_id');
             $table->string('tag');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 
