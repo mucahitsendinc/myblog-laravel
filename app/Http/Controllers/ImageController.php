@@ -11,7 +11,7 @@ class ImageController extends Controller
 {
     //
     public function getImages(Request $request){
-        return Image::get();
+        return Image::orderBy('id','DESC')->get();
     }
     public function newImage(Request $request){
 
