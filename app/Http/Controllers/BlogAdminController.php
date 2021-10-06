@@ -294,7 +294,7 @@ class BlogAdminController extends Controller
                         'uid'=>$crypt->crypt_router($post->id."",false,'encode'),
                         'title'=>$post->title,
                         'description'=>$post->description,
-                        'date'=>date('d-m-Y H:i', strtotime($post->created_at)),
+                        'date'=>date('d.m.Y H:i', strtotime($post->created_at)),
                         'image'=>$post->getImage->path
                     ]);
                 }
