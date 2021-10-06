@@ -21,9 +21,7 @@ class AboutUsSeeder extends Seeder
                     'list'=>json_encode([
                         'Dehasoft 5 Ay'
                     ]),
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'title'=>'Eğitim',
@@ -31,9 +29,7 @@ class AboutUsSeeder extends Seeder
                         'İstanbul Ayvansaray Üniversitesi ( Bilgisayar Programcılığı )',
                         'Otocenter Mesleki ve Teknik Anadolu Lisesi ( Veri Tabanı Programcılığı ) '
                     ]),
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'title'=>'Ödül & Başarı',
@@ -42,9 +38,7 @@ class AboutUsSeeder extends Seeder
                         '2020 Pi Wars Türkiye 2.lik'
 
                     ]),
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'title'=>'Yetenek',
@@ -71,9 +65,7 @@ class AboutUsSeeder extends Seeder
                         'REST Api'
 
                     ]),
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'title'=>'Projeler',
@@ -89,9 +81,7 @@ class AboutUsSeeder extends Seeder
                         'B2B Yönetim ve Lisans Kontrol Paneli'
 
                     ]),
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'title'=>'Sertifikalar',
@@ -109,9 +99,7 @@ class AboutUsSeeder extends Seeder
                         'Laravel ile sıfırdan e-ticaret ( Udemy ) ',
                         'Sıfırdan ileri seviye laravel ( Udemy ) '
                     ]),
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'title'=>'İlgi Alanları',
@@ -128,9 +116,7 @@ class AboutUsSeeder extends Seeder
                         'Ekip Çalışması',
 
                     ]),
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
 
             )

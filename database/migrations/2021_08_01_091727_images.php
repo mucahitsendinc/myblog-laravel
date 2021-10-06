@@ -17,6 +17,7 @@ class Images extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('path');
+            $table->string('fileId');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

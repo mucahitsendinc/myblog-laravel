@@ -19,30 +19,22 @@ class PagesSeeder extends Seeder
                 [
                     'name'=>'Ana Sayfa',
                     'url'=>'/',
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'name'=>'Blogum',
                     'url'=>'/blogum',
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'name'=>'Hakkımda',
                     'url'=>'/hakkimda',
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ],
                 [
                     'name'=>'İletişim',
                     'url'=>'/iletisim',
-                    'status'=>0,
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ]
             )
         );
