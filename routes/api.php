@@ -30,6 +30,8 @@ Route::middleware('login')->group(function (){
     /**
      * Blog Admin ROUTES
     */
+    Route::get('posts-without-recommendeds',[BlogAdminController::class,'getPostsWithoutRecommended']);
+
     Route::post('create-post',[BlogAdminController::class,'createPost']);
     Route::post('create-recommended',[BlogAdminController::class,'createRecommended']);
 

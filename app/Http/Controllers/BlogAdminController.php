@@ -12,6 +12,7 @@ use App\Models\Post;
 use App\Models\Image;
 use App\Models\Page;
 use App\Models\Tag;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class BlogAdminController extends Controller
 {
@@ -250,13 +251,14 @@ class BlogAdminController extends Controller
 
     }
     public function updateMainInfo(Request $request){
+        return $request->all();
         try {
             foreach ($request->all() as $key=> $element){
                 MainInfo::where('title',$key)->update(['info'=>$element]);
             }
             return response()->json(['status'=>'success','message'=>'Bilgiler başarı ile güncellendi'],200);
         }catch (\Exception $ex){
-            return response()->json(['status'=>'error','message'=>'Bazı bilgiler güncellenirken bir hata ile karşılaşıldı'],403);
+            return response()->json(['status'=>'error','message'=>'Bazı bilgiler güncellenirken bir hata ile karşılaşıldı'.$ex],403);
         }
         return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'],403);
     }
@@ -277,6 +279,32 @@ class BlogAdminController extends Controller
             }
         }
         return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'],403);
+
+    }
+    public function getPostsWithoutRecommended(Request $request){
+        $data=[];
+        $crypt=new DataCrypter;
+        try {
+            $posts=Post::where('status',0)->get();
+            foreach($posts as $post){
+                $check=Recommended::where('post_id',$post->id)->first();
+                if(empty($check->id)){
+
+                    array_push($data,[
+                        'uid'=>$crypt->crypt_router($post->id."",false,'encode'),
+                        'title'=>$post->title,
+                        'description'=>$post->description,
+                        'date'=>$post->created_at,
+                        'image'=>$post->getImage->path
+                    ]);
+                }
+            }
+            return response()->json(['status'=>'success','data'=>$data],403);
+        }catch (\Exception $ex){
+            return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'.$ex],403);
+        }
+        return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'],403);
+
 
     }
 }
