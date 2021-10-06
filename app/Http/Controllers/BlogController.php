@@ -222,16 +222,17 @@ class BlogController extends Controller
     public function getPostDetail(Request $request){
         $crypt=new DataCrypter;
         $url=$request->url;
+
         try {
             $page = Page::where('url',$url)->first(['id']);
-            if(empty($page)){
+            if(empty($page->id)){
                 return response()->json([
                     'status'=>'error',
                     'message'=>'Gönderi bulunamadı.Silinmiş veya yayından kaldırılmış olabilir'
                 ],200);
             }
 
-            $getPostDetail = Post::where('id',$page->id)->first();
+            $getPostDetail = Post::where('page_id',$page->id)->first();
             if(empty($getPostDetail)){
                 return response()->json([
                     'status'=>'error',

@@ -40,6 +40,8 @@ class BlogAdminController extends Controller
         $tags=$request->tags??[];
 
         $tags=$tags!=[] ? ($tags) : [];
+
+
         if(strlen($title)<3 || strlen($title)>255){ $error="Başık uzun/kısa!"; }
         else if(strlen($desc)>255){ $error="Açıklama uzun!"; }
         else if(strlen($image)<3 || strlen($image)>255){ $error="Resim uzun/kısa!"; }
