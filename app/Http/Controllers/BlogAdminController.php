@@ -33,16 +33,13 @@ class BlogAdminController extends Controller
                 'message'=>'Post paylaşma işlemi yetkili tarafından devre dışı bırakılmış durumda. Lütfen daha sonra tekrar deneyin.'
             ],403);
         }
-
         $title=$request->title??'';
         $desc=$request->description??'';
         $image=$request->image??'';
         $content=$request->content??'';
         $tags=$request->tags??[];
 
-
-        $tags=$tags!=[] ? json_decode($tags) : [];
-
+        $tags=$tags!=[] ? ($tags) : [];
         if(strlen($title)<3 || strlen($title)>255){ $error="Başık uzun/kısa!"; }
         else if(strlen($desc)>255){ $error="Açıklama uzun!"; }
         else if(strlen($image)<3 || strlen($image)>255){ $error="Resim uzun/kısa!"; }
