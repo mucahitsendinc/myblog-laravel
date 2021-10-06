@@ -32,9 +32,13 @@ Route::middleware('login')->group(function (){
     */
     Route::post('create-post',[BlogAdminController::class,'createPost']);
     Route::post('create-recommended',[BlogAdminController::class,'createRecommended']);
+
     Route::post('new-image',[ImageController::class,'newImage']);
-    Route::post('delete-image',[ImageController::class,'deleteImage']);
+    Route::delete('delete-image',[ImageController::class,'deleteImage']);
     Route::post('images',[ImageController::class,'getImages']);
+
+    Route::post('update-main-info',[BlogAdminController::class,'updateMainInfo']);
+
 });
 
 

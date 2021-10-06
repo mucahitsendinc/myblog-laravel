@@ -22,7 +22,7 @@ class BlogLogin
         if($token){
             return $next($request);
         }
-        return response()->json(['success'=>false,'message'=>'Oturum süresi aşılmış','oldToken'=>$request->bearerToken()],401);
+        return response()->json(['success'=>false,'message'=>'Oturum süresi aşılmış'],401);
 
        //if($request)
 

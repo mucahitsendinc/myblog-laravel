@@ -236,7 +236,7 @@ class BlogController extends Controller
             if(empty($getPostDetail)){
                 return response()->json([
                     'status'=>'error',
-                    'message'=>'Gönderi bulunamadı.Silinmiş veya yayından kaldırılmış olabilir'.$page->id
+                    'message'=>'Gönderi bulunamadı.Silinmiş veya yayından kaldırılmış olabilir'
                 ],200);
             }
             $postDetail=[
