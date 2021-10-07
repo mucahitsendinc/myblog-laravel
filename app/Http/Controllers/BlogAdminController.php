@@ -251,7 +251,6 @@ class BlogAdminController extends Controller
 
     }
     public function updateMainInfo(Request $request){
-        return $request->all();
         try {
             foreach ($request->all() as $key=> $element){
                 MainInfo::where('title',$key)->update(['info'=>$element]);
