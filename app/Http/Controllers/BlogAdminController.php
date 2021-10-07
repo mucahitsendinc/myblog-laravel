@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\DataCrypter;
 use App\Models\Comment;
 use App\Models\MainInfo;
 use App\Models\Recommended;
@@ -12,7 +11,6 @@ use App\Models\Post;
 use App\Models\Image;
 use App\Models\Page;
 use App\Models\Tag;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 class BlogAdminController extends Controller
 {
@@ -228,9 +226,7 @@ class BlogAdminController extends Controller
                 $recommended=Recommended::create([
                     'post_id'=>$post,
                     'arrangement'=>$max,
-                    'status'=>0,
-                    'create_date'=>date('Y-m-d H:i:s'),
-                    'update_date'=>date('Y-m-d H:i:s')
+                    'status'=>0
                 ]);
                 $recommended->save();
                 return response()->json([
@@ -293,7 +289,7 @@ class BlogAdminController extends Controller
                         'uid'=>$crypt->crypt_router($post->id."",false,'encode'),
                         'title'=>$post->title,
                         'description'=>$post->description,
-                        'date'=>date('d.m.Y H:i', strtotime($post->created_at)),
+                        'date'=>DataCrypter::timeHasPassed(date('d.m.Y', strtotime($post->created_at))),
                         'image'=>$post->getImage->path
                     ]);
                 }

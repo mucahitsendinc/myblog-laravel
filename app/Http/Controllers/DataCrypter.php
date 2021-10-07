@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class DataCrypter extends Controller
 {
@@ -31,7 +32,7 @@ class DataCrypter extends Controller
     public $keyyy="84sfghbn";
     public $secrettt="424cdeff";
 
-    public function crypter(Request $request){ // Test Request Method
+    private function crypter(Request $request){ // Test Request Method
         $data=$request->data;
         $time=$request->time=="true" ? true : false;
         $mode=$request->mode;
@@ -41,8 +42,7 @@ class DataCrypter extends Controller
             return $this->crypt_router($data,$time,$mode);
         }
     }
-
-    public function KEI1_mt_encode_data($string, $access_time = "")
+    private function KEI1_mt_encode_data($string, $access_time = "")
     {
         $access_time = $access_time == "" ? $this->access_time : $access_time;
         $method = $this->method;
@@ -61,7 +61,7 @@ class DataCrypter extends Controller
 
         return ($output);
     }
-    public function KEI1_mt_decode_data($string, $type = "")
+    private function KEI1_mt_decode_data($string, $type = "")
     {
         $method = $this->method;
         $key = $this->key;
@@ -92,7 +92,7 @@ class DataCrypter extends Controller
         /**
          * Bu fonksiyon içerisindeki komut satırına alınmış satırları sırasını değiştirerek
          * Algoritmada değişiklik yapın sonrasında else bloğunda tam tersine çevirin
-        */
+         */
 
         if($mode=="encode"){
             //$crypt=$this->KEI1_encode($string);
@@ -171,7 +171,7 @@ class DataCrypter extends Controller
         return $crypt;
 
     }
-    public function KEI1_encode($string,$method="",$key="",$secret=""){
+    private function KEI1_encode($string,$method="",$key="",$secret=""){
         if($method=="") { $method=$this->methodd; }
         if($key=="") { $key=$this->keyy; }
         if($secret=="") { $secret=$this->secrett; }
@@ -191,7 +191,7 @@ class DataCrypter extends Controller
 
         return base64_encode($output);
     }
-    public function KEI1_decode($string,$type="off",$method="",$key="",$secret="")
+    private function KEI1_decode($string,$type="off",$method="",$key="",$secret="")
     {
         if($method=="") { $method=$this->methodd; }
         if($key=="") { $key=$this->keyy; }
@@ -209,5 +209,22 @@ class DataCrypter extends Controller
         return $string;
     }
 
+    public static function timeHasPassed($time){
+        $now=Carbon::now();
+
+        $time=Carbon::parse($time);
+
+        $saniye=$now->diffInSeconds($time, false);
+        $dakika=$now->diffInMinutes($time, false);
+        $saat=$now->diffInHours($time, false);
+        $gun=$now->diffInDays($time, false);
+        $ay=$now->diffInMonths($time, false);
+        $yil=$now->diffInYears($time, false);
+        $hafta=$gun>-7 ? 0 : ( $gun>-13 ? 1 : ( $gun>-20 ? 2 : 3 ) );
+        $sure=$yil!= 0 ? $yil." yıl" : ($ay!=0 ? $ay." ay" : ( $hafta!=0 ? $hafta." hafta" : ( $gun!=0 ? $gun." gün" : ( $saat!=0 ? $saat." saat" : ( $dakika!=0 ? $dakika." dakika" : $saniye." saniye" ) ) ) ) );
+
+        return str_replace("-","",$sure)." önce";
+
+    }
 
 }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogAdminController;
 use App\Http\Controllers\ImageController;
-
+use App\Http\Controllers\DataCrypter;
 Route::middleware('login')->group(function (){
     /**
      * Blog Test Routes
@@ -43,6 +43,7 @@ Route::middleware('login')->group(function (){
 
 });
 
+Route::post('test-time',[DataCrypter::class,'timeHasPassed']);
 
 Route::post('login',[ApiController::class,'login']);
 
