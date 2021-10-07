@@ -36,7 +36,7 @@ Route::middleware('login')->group(function (){
     Route::post('create-recommended',[BlogAdminController::class,'createRecommended']);
 
     Route::post('new-image',[ImageController::class,'newImage']);
-    Route::delete('delete-image',[ImageController::class,'deleteImage']);
+    Route::post('delete-image',[ImageController::class,'deleteImage']);
     Route::post('images',[ImageController::class,'getImages']);
 
     Route::post('update-main-info',[BlogAdminController::class,'updateMainInfo']);
