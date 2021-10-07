@@ -299,7 +299,7 @@ class BlogAdminController extends Controller
                     ]);
                 }
             }
-            return response()->json(['status'=>'success','data'=>$data],403);
+            return response()->json(['status'=>'success','data'=>$data],200);
         }catch (\Exception $ex){
             return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'.$ex],403);
         }
