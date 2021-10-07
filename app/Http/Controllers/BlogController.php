@@ -15,7 +15,6 @@ use App\Models\AboutUs;
 
 class BlogController extends Controller
 {
-    //
     public function sendContact(Request $request){
 
         $check=Setting::where('setting','contact')->first(['option']);
@@ -188,10 +187,19 @@ class BlogController extends Controller
             'data'=>$getInfos
         ],200);
     }
-    public function getPosts(){
+    public function getPosts(Request $request){
         $crypt=new DataCrypter;
         try {
-            $getPosts=Post::where('status',0)->orderBy('id', 'desc')->get();
+            if(isset($request->limit)){
+                try {
+                    $limit=$request->limit*1;
+                    $getPosts=Post::where('status',0)->orderBy('id', 'desc')->limit($limit)->get();
+                }catch (\Exception $ex){
+                    return response()->json(['status'=>'error','message'=>'Tanımlanamayan limit gönderildi'],403);
+                }
+            }else{
+                $getPosts=Post::where('status',0)->orderBy('id', 'desc')->get();
+            }
             $posts=[];
             $i=0;
             foreach($getPosts as $post){
@@ -267,7 +275,16 @@ class BlogController extends Controller
         $crypt=new DataCrypter;
         $post=$request->post;
         try {
-            $post=Post::where('id',$crypt->crypt_router($post,false,'decode'))->first();
+            if(isset($request->limit)){
+                try {
+                    $limit=$request->limit*1;
+                    $post=Post::where('id',$crypt->crypt_router($post,false,'decode'))->limit($limit)->first();
+                }catch (\Exception $ex){
+                    return response()->json(['status'=>'error','message'=>'Tanımlanamayan limit gönderildi'],403);
+                }
+            }else{
+                $post=Post::where('id',$crypt->crypt_router($post,false,'decode'))->first();
+            }
             $comments=$post->getComments;
         }catch (\Exception $ex){
             return response()->json([
@@ -281,11 +298,22 @@ class BlogController extends Controller
             'data'=>$comments
         ],200);
     }
-    public function getRecommended(){
+    public function getRecommended(Request $request){
         $crypt=new DataCrypter;
+
         //return $crypt->crypt_router('2',false,'encode');
         try {
-            $getRecommended=Recommended::where('status',0)->orderByDesc('arrangement')->get();
+            if(isset($request->limit)){
+                try {
+                    $limit=$request->limit*1;
+                    $getRecommended=Recommended::where('status',0)->orderByDesc('arrangement')->limit($limit)->get();
+                }catch (\Exception $ex){
+                    return response()->json(['status'=>'error','message'=>'Tanımlanamayan limit gönderildi'],403);
+                }
+            }else{
+                $getRecommended=Recommended::where('status',0)->orderByDesc('arrangement')->get();
+            }
+
             $posts=[];
             $i=0;
             foreach($getRecommended as $poster){
