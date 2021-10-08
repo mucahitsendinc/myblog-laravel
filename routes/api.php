@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogAdminController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\DataCrypter;
+
 Route::middleware('login')->group(function (){
     /**
      * Blog Test Routes
@@ -14,7 +14,8 @@ Route::middleware('login')->group(function (){
     Route::post('encode',[DataCrypter::class,'crypter']);
     Route::post('decode',[DataCrypter::class,'crypter']);
     Route::post('test',function (){ return "basarili"; });
-    Route::get('migrate',function(){
+
+    /*Route::get('migrate',function(){
         Artisan::call('migrate:refresh');
         dd('migrated!');
     });
@@ -25,7 +26,7 @@ Route::middleware('login')->group(function (){
         Artisan::call('cache:clear');
         Artisan::call('key:generate');
         dd('cache temizlendi!');
-    });
+    });*/
 
     /**
      * Blog Admin ROUTES
@@ -37,7 +38,7 @@ Route::middleware('login')->group(function (){
 
     Route::post('new-image',[ImageController::class,'newImage']);
     Route::post('delete-image',[ImageController::class,'deleteImage']);
-    Route::post('images',[ImageController::class,'getImages']);
+    Route::post('images',[ImageController::class,'getImages'])->middleware('cacheimages');
 
     Route::post('update-main-info',[BlogAdminController::class,'updateMainInfo']);
 
@@ -49,7 +50,7 @@ Route::post('login',[ApiController::class,'login']);
 
 Route::post('main-info',[BlogController::class,'getMainInfo']);
 
-Route::post('posts',[BlogController::class,'getPosts']);
+Route::post('posts',[BlogController::class,'getPosts'])->middleware('cacheposts');
 
 Route::post('post-detail',[BlogController::class,'getPostDetail']);
 
