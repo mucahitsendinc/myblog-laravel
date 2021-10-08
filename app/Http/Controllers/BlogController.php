@@ -212,7 +212,7 @@ class BlogController extends Controller
                     'description'=>$post->description,
                     'url'=>$post->getUrl->url,
                     'image'=>$post->getImage->path,
-                    'date'=>DataCrypter::timeHasPassed(date('d.m.Y', strtotime($post->created_at))),
+                    'date'=>DataCrypter::timeHasPassed(date('d.m.Y H:i:s', strtotime($post->created_at))),
                     'tags'=>$tags
                 ];
                 array_push($posts,$newPost);
@@ -326,7 +326,7 @@ class BlogController extends Controller
                     'description'=>$post->description,
                     'url'=>$post->getUrl->url,
                     'image'=>$post->getImage->path,
-                    'date'=>DataCrypter::timeHasPassed(date('d.m.Y', strtotime($post->created_at))),
+                    'date'=>DataCrypter::timeHasPassed(date('d.m.Y H:i:s', strtotime($post->created_at))),
                     'tags'=>$post->getTags
                 ];
                 array_push($posts,$newPost);
