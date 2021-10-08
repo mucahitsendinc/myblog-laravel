@@ -35,6 +35,11 @@ class PagesSeeder extends Seeder
                     'name'=>'İletişim',
                     'url'=>'/iletisim',
                     'status'=>0
+                ],
+                [
+                    'name'=>'Blog sayfamı hazırlama sürecim',
+                    'url'=>'blog-sayfami-hazirlama-surecim',
+                    'status'=>0
                 ]
             )
         );
