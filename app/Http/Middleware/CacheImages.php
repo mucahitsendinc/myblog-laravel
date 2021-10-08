@@ -19,7 +19,7 @@ class CacheImages
     {
         //Cache::delete('images');
         if(!Cache::has('images')){
-            Cache::remember('images', 3600, function () use($next,$request) {
+            Cache::remember('images', 380, function () use($next,$request) {
                 return $next($request);
             });
         }else{

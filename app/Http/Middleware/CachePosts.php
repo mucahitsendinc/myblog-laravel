@@ -17,9 +17,9 @@ class CachePosts
      */
     public function handle(Request $request, Closure $next)
     {
-
+        Cache::delete('posts');
         if(Cache::get('posts')==null){
-            Cache::remember('posts', 3600, function () use($next,$request) {
+            Cache::remember('posts', 380, function () use($next,$request) {
                 return $next($request);
             });
         }else{
