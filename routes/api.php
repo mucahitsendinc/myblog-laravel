@@ -46,9 +46,7 @@ Route::middleware('login')->group(function (){
 
 
 
-Route::post('test-time',function(){
-    return date('Y-m-d H:i:s');
-});
+Route::post('test-time',[DataCrypter::class,'timeHasPassed']);
 
 Route::post('login',[ApiController::class,'login']);
 

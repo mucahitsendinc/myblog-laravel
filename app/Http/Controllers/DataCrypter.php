@@ -209,7 +209,7 @@ class DataCrypter extends Controller
         return $string;
     }
 
-    public static function timeHasPassed($time){
+    public static function timeHasPassed($time="2021-10-08 18:12:32"){
         $now=Carbon::now();
 
         $time=Carbon::parse($time);
