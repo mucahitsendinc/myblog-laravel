@@ -257,20 +257,25 @@ class BlogAdminController extends Controller
         }
         return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'],403);
     }
+    public function getSettings(Request $request){
+        return Setting::where('setting','!=','access')->get(['id','setting','option']);
+    }
     public function updateSettings(Request $request){
         if(count($request->all())>1){
             return response()->json(['status'=>'error','message'=>'Ayn anda birden fazla ayar güncelleyemezsiniz'],403);
         }
 
         foreach ($request->all() as $key=>$element){
+
             if($element!="enable" && $element!="disable"){
                 return response()->json(['status'=>'error','message'=>'Ayar tanımı hatalı'],403);
             }
+
             try {
-                Setting::where('setting',$key)->update(['option',$element]);
-                return response()->json(['status'=>'success','message'=>'Ayar başarı ile güncellendi'],200);
+                Setting::where('setting',$key)->update(['option'=>$element]);
+                return response()->json(['status'=>'success','message'=>'Ayar başarı ile güncellendi','log'=>$element.'-'.$key],200);
             }catch (\Exception $ex){
-                return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'],403);
+                return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'.$ex],403);
             }
         }
         return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'],403);

@@ -40,13 +40,16 @@ Route::middleware('login')->group(function (){
     Route::post('delete-image',[ImageController::class,'deleteImage']);
     Route::post('images',[ImageController::class,'getImages'])->middleware('cacheimages');
 
+
     Route::post('update-main-info',[BlogAdminController::class,'updateMainInfo']);
+    Route::post('update-settings',[BlogAdminController::class,'updateSettings']);
+    Route::post('settings',[BlogAdminController::class,'getSettings']);
 
 });
 
 
 
-Route::post('test-time',[DataCrypter::class,'timeHasPassed']);
+/*Route::post('test-time',[DataCrypter::class,'timeHasPassed']);*/
 
 Route::post('login',[ApiController::class,'login']);
 
