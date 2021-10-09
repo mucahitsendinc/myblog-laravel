@@ -17,7 +17,7 @@ class ApiController extends Controller
 
         if(isset($access) && !empty($access)){
             $check=Setting::where('setting','access')->first(['option']);
-            dd($check->option,$access,123,env('DEFAULT_ACCESS'));
+            return response()->json(['message'=>$check->option.' - - -- - -- -    '.$access.'---- - -- - - -- -- ---'.env('DEFAULT_ACCESS')],401);
 
             if(strlen($check->option)>0 && $check->option==$access){
                 $newToken=$crypt->crypt_router($request->password,true,'encode');
