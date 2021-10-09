@@ -319,7 +319,7 @@ class BlogAdminController extends Controller
             $check=Setting::where('setting','access')->where('option',$access)->update(['option'=>$newAccess]);
             if($check){
                 $token=$crypt->crypt_router($request->newaccess,true,'encode');
-                return response()->json(['status'=>'success','message'=>'Erişim parolası başarı ile güncellendi','token'=>$token],403);
+                return response()->json(['status'=>'success','message'=>'Erişim parolası başarı ile güncellendi','token'=>$token],200);
             }else{
                 return response()->json(['status'=>'error','message'=>'Erişim parolası güncellenemedi'],403);
             }
