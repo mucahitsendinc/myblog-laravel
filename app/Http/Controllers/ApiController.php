@@ -12,7 +12,7 @@ class ApiController extends Controller
 
 
     public function login(Request $request){
-
+        dd(env('DEFAULT_ACCESS'));
         $crypt=new DataCrypter;
         $access=$crypt->crypt_router($request->password,false,'encode');
 
