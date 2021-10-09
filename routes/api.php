@@ -45,6 +45,8 @@ Route::middleware('login')->group(function (){
     Route::post('update-settings',[BlogAdminController::class,'updateSettings']);
     Route::post('settings',[BlogAdminController::class,'getSettings']);
 
+    Route::post('change-access',[BlogAdminController::class,'changeAccess']);
+
 });
 
 

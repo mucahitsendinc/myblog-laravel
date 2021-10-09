@@ -307,4 +307,27 @@ class BlogAdminController extends Controller
 
 
     }
+    public function changeAccess(Request $request){
+        if($request->newaccess==$request->access){
+            return response()->json(['status'=>'error','message'=>'Yeni erişim parolası eskisi ile aynı olamaz'],403);
+        }else if(!isset($request->newaccess) || strlen($request->newaccess)<1){
+            return response()->json(['status'=>'error','message'=>'Yeni erişim parolası gerekli bir alandır'],403);
+        }else if(isset($request->access) && strlen($request->access)>0){
+            $crypt=new DataCrypter;
+            $access=$crypt->crypt_router($request->access,false,'encode');
+            $newAccess=$crypt->crypt_router($request->newaccess,false,'encode');
+            $check=Setting::where('setting','access')->where('option',$access)->update(['option'=>$newAccess]);
+            if($check){
+                $token=$crypt->crypt_router($request->newaccess,true,'encode');
+                return response()->json(['status'=>'success','message'=>'Erişim parolası başarı ile güncellendi','token'=>$token],403);
+            }else{
+                return response()->json(['status'=>'error','message'=>'Erişim parolası güncellenemedi'],403);
+            }
+            return $check;
+        }else{
+            return response()->json(['status'=>'error','message'=>'Eski erişim parolası girilmeden güncelleme işlemi yapılamaz'],403);
+        }
+        return response()->json(['status'=>'error','message'=>'Teknik bir hata oluştu'],403);
+
+    }
 }
