@@ -13,12 +13,11 @@ class ApiController extends Controller
 
     public function login(Request $request){
         $crypt=new DataCrypter;
+
         $access=$crypt->crypt_router($request->password,false,'encode');
 
         if(isset($access) && !empty($access)){
             $check=Setting::where('setting','access')->first(['option']);
-            return response()->json(['message'=>$check->option.' - - -- - -- -    '.$access.'---- - -- - - -- -- ---'.env('DEFAULT_ACCESS')],401);
-
             if(strlen($check->option)>0 && $check->option==$access){
                 $newToken=$crypt->crypt_router($request->password,true,'encode');
                 return response()->json(['success'=>true,'token'=>$newToken],200);
