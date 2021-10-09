@@ -308,10 +308,10 @@ class BlogAdminController extends Controller
 
     }
     public function changeAccess(Request $request){
-        if($request->newaccess==$request->access){
-            return response()->json(['status'=>'error','message'=>'Yeni erişim parolası eskisi ile aynı olamaz'],403);
-        }else if(!isset($request->newaccess) || strlen($request->newaccess)<1){
+        if(!isset($request->newaccess) || strlen($request->newaccess)<1){
             return response()->json(['status'=>'error','message'=>'Yeni erişim parolası gerekli bir alandır'],403);
+        }else if($request->newaccess==$request->access){
+            return response()->json(['status'=>'error','message'=>'Yeni erişim parolası eskisi ile aynı olamaz'],403);
         }else if(isset($request->access) && strlen($request->access)>0){
             $crypt=new DataCrypter;
             $access=$crypt->crypt_router($request->access,false,'encode');
