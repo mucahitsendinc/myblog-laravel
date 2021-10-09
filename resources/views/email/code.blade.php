@@ -61,7 +61,7 @@
                             <tr>
                                 <td class="sub-title" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;padding-top:5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 18px;line-height: 29px;font-weight: bold;text-align: center;">
                                     <div class="mktEditable" id="intro_title">
-                                        Eğer parolanızı sıfırlamak isterseniz aşağıdaki butona tıklayarak yeni parola oluşturma sayfasına yönlendirilebilirsiniz.
+                                        Eğer parolanızı sıfırlamak isterseniz aşağıdaki butona tıklayarak yeni parola oluşturma sayfasına yönlendirilebilirsiniz.Bağlantı geçerlilik süresü 3 dakikadır.
                                     </div></td>
                             </tr>
                             <tr>
@@ -82,7 +82,7 @@
                             <tr>
                                 <td class="text" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 24px;">
                                     <div class="mktEditable" id="download_button" style="text-align: center;">
-                                        <a style="color:#ffffff; background-color: #ff8300; border: 20px solid #ff8300; border-left: 20px solid #ff8300; border-right: 20px solid #ff8300; border-top: 10px solid #ff8300; border-bottom: 10px solid #ff8300;border-radius: 3px; text-decoration:none;" href="#">Parolamı Değiştir</a>
+                                        <a style="color:#ffffff; background-color: #ff8300; border: 20px solid #ff8300; border-left: 20px solid #ff8300; border-right: 20px solid #ff8300; border-top: 10px solid #ff8300; border-bottom: 10px solid #ff8300;border-radius: 3px; text-decoration:none;" href="{{$link}}">Parolamı Değiştir</a>
                                     </div>
                                 </td>
                             </tr>
