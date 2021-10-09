@@ -15,6 +15,7 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
+
         $crypt=new DataCrypter;
         DB::table('settings')->insert([
             ['setting'=>'access','option'=>$crypt->crypt_router(md5(env('DEFAULT_ACCESS'))."",false,'encode')],

@@ -17,6 +17,7 @@ class BlogLogin
      */
     public function handle(Request $request, Closure $next)
     {
+        dd(env('DEFAULT_ACCESS'));
         $check=new ApiController;
         $token=$check->checkToken($request->bearerToken());
         if($token){
