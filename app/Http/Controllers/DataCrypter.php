@@ -32,7 +32,7 @@ class DataCrypter extends Controller
     public $keyyy="84sfghbn";
     public $secrettt="424cdeff";
 
-    private function crypter(Request $request){ // Test Request Method
+    public function crypter(Request $request){ // Test Request Method
         $data=$request->data;
         $time=$request->time=="true" ? true : false;
         $mode=$request->mode;
@@ -87,7 +87,7 @@ class DataCrypter extends Controller
         }
         return $response;
     }
-    public function crypt_router($string,$time=false,$mode="encode"){
+    public function crypt_router($string,$time=false,$mode="encode",$access_time="empty"){
 
         /**
          * Bu fonksiyon içerisindeki komut satırına alınmış satırları sırasını değiştirerek
@@ -98,7 +98,7 @@ class DataCrypter extends Controller
             //$crypt=$this->KEI1_encode($string);
             $crypt=$string;
             if($time==true){
-                $crypt=$this->KEI1_mt_encode_data($crypt,$this->access_time);
+                $crypt=$this->KEI1_mt_encode_data($crypt,$access_time="empty" ? $this->access_time : $access_time);
             }
             $crypt=$this->KEI1_encode($crypt,$this->method,$this->key,$this->secret);
             //$crypt=$this->KEI1_encode($crypt,$this->method,$this->keyy,$this->secret);

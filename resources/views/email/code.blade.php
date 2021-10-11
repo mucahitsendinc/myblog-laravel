@@ -37,14 +37,14 @@
 
     }
 </style>
-<body link="#00a5b5" vlink="#00a5b5" alink="#00a5b5">
+<body link="#1D3799" vlink="#1D3799" alink="#1D3799">
 
 <table class=" main contenttable" align="center" style="font-weight: normal;border-collapse: collapse;border: 0;margin-left: auto;margin-right: auto;padding: 0;font-family: Arial, sans-serif;color: #555559;background-color: white;font-size: 16px;line-height: 26px;width: 600px;">
     <tr>
         <td class="border" style="border-collapse: collapse;border: 1px solid #eeeff0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
             <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
                 <tr>
-                    <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid #00a5b5">
+                    <td colspan="4" valign="top" class="image-section" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background-color: #fff;border-bottom: 4px solid #1D3799">
                         <a href="https://mucahitsendinc.com"><img  class="top-image" src="https://mucahitsendinc.com/logo512.png" style="line-height: 1;width: 600px;" alt="Tenable Network Security"></a>
                     </td>
                 </tr>
@@ -82,7 +82,7 @@
                             <tr>
                                 <td class="text" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 24px;">
                                     <div class="mktEditable" id="download_button" style="text-align: center;">
-                                        <a style="color:#ffffff; background-color: #ff8300; border: 20px solid #ff8300; border-left: 20px solid #ff8300; border-right: 20px solid #ff8300; border-top: 10px solid #ff8300; border-bottom: 10px solid #ff8300;border-radius: 3px; text-decoration:none;" href="{{$link}}">Parolamı Değiştir</a>
+                                        <a style="color:#ffffff; background-color: #1D3799; border: 20px solid #1D3799; border-left: 20px solid #1D3799; border-right: 20px solid #1D3799; border-top: 10px solid #1D3799; border-bottom: 10px solid #1D3799;border-radius: 3px; text-decoration:none;" href="{{$link}}">Parolamı Değiştir</a>
                                     </div>
                                 </td>
                             </tr>
@@ -102,13 +102,13 @@
                     </td>
                 </tr>
 
-                <tr bgcolor="#fff" style="border-top: 4px solid #00a5b5;">
+                <tr bgcolor="#fff" style="border-top: 4px solid #1D3799;">
                     <td valign="top" class="footer" style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;background: #fff;text-align: center;">
                         <table style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
                             <tr>
                                 <td class="inside-footer" align="center" valign="middle" style="border-collapse: collapse;border: 0;margin: 0;padding: 20px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 12px;line-height: 16px;vertical-align: middle;text-align: center;width: 580px;">
                                     <div id="address" class="mktEditable">
-                                        <a style="color: #00a5b5;" href="https://www.mucahitsendinc.com">2021 &copy; Mücahit Sendinç</a>
+                                        <a style="color: #1D3799;" href="https://www.mucahitsendinc.com">2021 &copy; Mücahit Sendinç</a>
                                     </div>
                                 </td>
                             </tr>

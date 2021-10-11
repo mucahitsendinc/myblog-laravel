@@ -52,6 +52,7 @@ Route::middleware('login')->group(function (){
 
 
 Route::post('forgot-access',[ApiController::class,'forgotAccess']);
+Route::post('reset-access',[ApiController::class,'resetAccess']);
 /*Route::post('test-time',[DataCrypter::class,'timeHasPassed']);*/
 
 Route::post('login',[ApiController::class,'login']);
