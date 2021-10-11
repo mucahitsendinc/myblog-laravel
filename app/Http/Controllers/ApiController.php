@@ -48,7 +48,7 @@ class ApiController extends Controller
                 'access'=>md5((Setting::where('setting','access')->first(['option']))->option),
                 'type'=>'resetaccess'
             ]);
-            $token=$crypt->crypt_router($token,true,'encode',2180);
+            $token=$crypt->crypt_router($token,true,'encode',180);
             $data = [
                 'link'=>env('APP_FRONT_URL').'/yonetici/parola-sifirla/'.$token,
                 'email'=>(MainInfo::where('title','email')->where('status',0)->first(['info']))->info
