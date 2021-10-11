@@ -74,7 +74,6 @@ class ApiController extends Controller
             $crypt=new DataCrypter;
             $token=$request->token;
             $token=$crypt->crypt_router($token,true,'decode');
-            return response()->json(['success'=>false,'message'=>$token],403);
             try {
                 $token=(json_decode($token[0]));
                 if($token->type=="resetaccess"){
