@@ -72,9 +72,8 @@ class DataCrypter extends Controller
         $string = openssl_decrypt($string, $method, $key, 0, $iv);
         if ($type == "") {
             $string = explode($this->explode_key, $string);
-        } else {
-            $string = ($string);
         }
+
         if ($string[count($string) - 1] <= time()) {
             $string[count($string) - 1] = "false";
             return false;
@@ -93,12 +92,11 @@ class DataCrypter extends Controller
          * Bu fonksiyon içerisindeki komut satırına alınmış satırları sırasını değiştirerek
          * Algoritmada değişiklik yapın sonrasında else bloğunda tam tersine çevirin
          */
-
         if($mode=="encode"){
             //$crypt=$this->KEI1_encode($string);
             $crypt=$string;
             if($time==true){
-                $crypt=$this->KEI1_mt_encode_data($crypt,$access_time="empty" ? $this->access_time : $access_time);
+                $crypt=$this->KEI1_mt_encode_data($crypt,$access_time=="empty" ? $this->access_time : $access_time);
             }
             $crypt=$this->KEI1_encode($crypt,$this->method,$this->key,$this->secret);
             //$crypt=$this->KEI1_encode($crypt,$this->method,$this->keyy,$this->secret);

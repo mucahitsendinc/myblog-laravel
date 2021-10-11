@@ -48,7 +48,7 @@ class ApiController extends Controller
                 'access'=>md5((Setting::where('setting','access')->first(['option']))->option),
                 'type'=>'resetaccess'
             ]);
-            $token=$crypt->crypt_router($token,true,'encode',180);
+            $token=$crypt->crypt_router($token,true,'encode',30);
             $data = [
                 'link'=>env('APP_FRONT_URL').'/yonetici/parola-sifirla/'.$token,
                 'email'=>(MainInfo::where('title','email')->where('status',0)->first(['info']))->info
@@ -74,6 +74,7 @@ class ApiController extends Controller
             $crypt=new DataCrypter;
             $token=$request->token;
             $token=$crypt->crypt_router($token,true,'decode');
+            return response()->json(['success'=>false,'message'=>$token],403);
             try {
                 $token=(json_decode($token[0]));
                 if($token->type=="resetaccess"){
