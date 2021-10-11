@@ -64,7 +64,9 @@ class ApiController extends Controller
         }
     }
     public function resetAccess(Request $request){
-        if(!isset($request->newaccess) || !isset($request->rnewaccess)){
+        if($request->newaccess=="d41d8cd98f00b204e9800998ecf8427e"){
+            return response()->json(['success'=>false,'message'=>'Yeni erişim parolası boş olamaz'],403);
+        }else if(!isset($request->newaccess) || !isset($request->rnewaccess)){
             return response()->json(['success'=>false,'message'=>'Yeni erişim parolası olmadan güncelleme yapamazsınız'],403);
         }else if(strlen($request->newaccess)!=32 || $request->newaccess!=$request->rnewaccess){
             return response()->json(['success'=>false,'message'=>'Yeni erişim parolası ve tekrarı kabul edilemeyen formatta!'],403);
